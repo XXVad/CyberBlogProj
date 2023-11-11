@@ -114,7 +114,7 @@ input::placeholder {
   }
 }
 .enter-button {
-  border-radius: 0px;
+  border-radius: 10px;
   border: 5px solid #bf00fe;
   background: #e100f2;
   height: 70px;
