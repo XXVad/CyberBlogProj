@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Stalinist+One:regular);
 @import url(https://fonts.googleapis.com/css?family=Ruslan+Display:regular);
-@import url(_normalize.css);
+@import url(./_normalize.css);
 body {
 }
 .wrapper {
