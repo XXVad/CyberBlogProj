@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мій блог</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Мій блог</h1>
+
+      <h2>Створити новий пост</h2>
+      <form id="createPostForm">
+        <div>
+          <label for="title">Заголовок:</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+        <div>
+          <label for="description">Опис:</label>
+          <textarea id="description" name="description" required></textarea>
+        </div>
+        <div>
+          <label for="author">Автор:</label>
+          <input type="text" id="author" name="author" required />
+        </div>
+        <button type="submit">Створити пост</button>
+      </form>
+
+      <div id="posts">
+        <!-- Сюди будуть додаватися пости з бекенду -->
+      </div>
+    </div>
+
+    <script>
+      const createPostForm = document.getElementById('createPostForm');
+      const postsContainer = document.getElementById('posts');
+
+      async function createPost(event) {
+        event.preventDefault();
+        const {title, description, author} = createPostForm.elements;
+        try {
+          const response = await fetch('/posts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              title: title.value,
+              description: description.value,
+              author: author.value,
+            }),
+          });
+          if (response.status === 201) {
+            const postData = await response.json();
+            displayPost(postData);
+          } else {
+            console.error('Помилка при створенні поста');
+          }
+        } catch (error) {
+          console.error('Помилка при відправленні запиту:', error);
+        }
+      }
+
+      createPostForm.addEventListener('submit', createPost);
+
+      function displayPost(post) {
+        const postElement = document.createElement('div');
+        postElement.classList.add('post');
+        postElement.innerHTML = `
+          <h3>${post.title}</h3>
+          <p>${post.description}</p>
+          <p><strong>Автор:</strong> ${post.author}</p>
+        `;
+        postsContainer.appendChild(postElement);
+      }
+
+      async function loadPosts() {
+        try {
+          const response = await fetch('/posts');
+          if (response.status === 200) {
+            const postsData = await response.json();
+            postsData.forEach(displayPost);
+          } else {
+            console.error('Помилка при завантаженні постів');
+          }
+        } catch (error) {
+          console.error('Помилка при відправленні запиту:', error);
+        }
+      }
+
+      loadPosts();
+    </script>
+  </body>
+</html>
