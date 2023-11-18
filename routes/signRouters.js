@@ -1,13 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const signController = require('../controllers/signController');
-router.post('/signUp', signController.insertUser);
 
 router.get('/signUp', (req, res) => {
-  res.sendFile('signUp.html', {root: './views'});
+  res.render('signUp.ejs', {root: './views'});
 });
 
+router.post('/signUp', signController.signUp);
+
 router.get('/signIn', (req, res) => {
-  res.sendFile('signIn.html', {root: './views'});
+  res.render('signIn.ejs', {root: './views'});
 });
+
+router.post('/signIn', signController.signIn);
+
+router.get('/blog', (req, res) => {
+  res.render('blog.ejs', {root: './views'});
+});
+
 module.exports = router;
