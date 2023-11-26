@@ -54,7 +54,7 @@ exports.signIn = async (req, res) => {
     }
 
     // Перенаправлення користувача після успішного входу
-    res.redirect('/posts');
+    res.redirect('/index.html');
   } catch (error) {
     console.error(error);
     return res.status(500).send('Внутрішня помилка сервера');

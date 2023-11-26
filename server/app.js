@@ -1,5 +1,5 @@
 // app.js
-
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -16,7 +16,13 @@ app.set('view engine', 'ejs');
 // Використання middleware для обробки форм та JSON
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-
+app.use(
+  cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Дозвіл передачconst cors = require('cors;)і куків та аутентифікації через кукі
+  })
+);
 // Використання статичної директорії для ресурсів
 app.use(express.static(path.join(__dirname, 'public')));
 

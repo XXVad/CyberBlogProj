@@ -6,7 +6,7 @@ const signController = require('../controllers/signController');
 
 // Маршрут для отримання форми реєстрації
 router.get('/signUp', (req, res) => {
-  res.render('signUp.ejs', {root: './views'});
+  res.send('signUp.html');
 });
 
 // Маршрут для обробки реєстрації користувача
@@ -14,7 +14,7 @@ router.post('/signUp', signController.signUp);
 
 // Маршрут для отримання форми входу
 router.get('/signIn', (req, res) => {
-  res.render('signIn.ejs', {root: './views'});
+  res.send('signIn.html');
 });
 
 // Маршрут для обробки входу користувача

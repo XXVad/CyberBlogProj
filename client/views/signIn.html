@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignIn</title>
+    <link rel="stylesheet" href="../public/signInStyle.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <div class="header-flex">
+          <div class="enter-text">Sign In</div>
+          <a href="#" class="logo-ref"
+            ><img class="logo" src="../public/icons/logo.png" alt="Cyberblog"
+          /></a>
+        </div>
+        <div class="main">
+          <form class="loginForm" id="loginForm">
+            <div class="username-flex">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="password-flex">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button class="enter-button" type="button" onclick="signIn()">
+              <span class="button-text">Go</span>
+            </button>
+          </form>
+          <div class="lower-text-flex">
+            <div class="left-text">No Account?</div>
+            <a href="signUp.html" class="right-ref">SignUp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function signIn() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Отправка данных на сервер
+        // ...
+
+        fetch('http://localhost:3000/signIn', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({email, password}),
+        })
+          .then((response) => response.text()) // измените здесь
+          .then((data) => {
+            // Обработка ответа от сервера
+            console.log(data);
+
+            // Вместо console.log вы можете добавить код для обновления интерфейса или перенаправления пользователя
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            // Обработка ошибок
+          });
+
+        // ...
+      }
+    </script>
+  </body>
+</html>
