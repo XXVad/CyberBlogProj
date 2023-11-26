@@ -1,8 +1,15 @@
+// signModel.js
+
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
-  email: {type: String, required: true},
-  password: {type: String, required: true},
+// Схема для моделі користувача
+const UserSchema = mongoose.Schema({
+  email: {type: String, required: true}, // Email користувача, обов'язкове поле
+  password: {type: String, required: true}, // Пароль користувача, обов'язкове поле
 });
-const signModel = mongoose.model('User', userSchema);
+
+// Створення моделі користувача на основі схеми
+const signModel = mongoose.model('User', UserSchema);
+
+// Експорт моделі для використання в інших частинах програми
 module.exports = signModel;

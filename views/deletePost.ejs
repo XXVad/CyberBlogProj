@@ -1,0 +1,12 @@
+<!-- views/deletePost.ejs -->
+
+<h2>Видалення поста</h2>
+<p>Ви впевнені, що хочете видалити наступний пост?</p>
+<p>Title: <%= post.title %></p>
+<p>Content: <%= post.content %></p>
+
+<form method="POST" action="/posts/<%= post._id %>/delete">
+  <button type="submit">Підтвердити видалення</button>
+</form>
+
+<a href="/posts">Повернутися до постів</a>

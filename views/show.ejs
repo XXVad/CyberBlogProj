@@ -1,0 +1,15 @@
+<!-- views/show.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Blog</title>
+  </head>
+  <body>
+    <h1><%= post.title %></h1>
+    <p><%= post.content %></p>
+    <a href="/posts">Back to All Posts</a>
+    <a href="/posts/<%= post._id %>/delete" class="delete">delete</a>
+  </body>
+</html>
