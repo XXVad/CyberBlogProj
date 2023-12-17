@@ -16,14 +16,15 @@
           /></a>
         </div>
         <div class="main">
-          <form class="loginForm" id="loginForm">
+          <form class="loginForm" onsubmit="submitForm(event)">
             <div class="username-flex">
-              <label for="email">Email</label>
+              <label for="nickname">Cybername</label>
               <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email"
+                type="text"
+                id="nickname"
+                name="nickname"
+                placeholder="nickname"
+                autocomplete="nickname"
                 required
               />
             </div>
@@ -33,11 +34,16 @@
                 type="password"
                 id="password"
                 name="password"
-                placeholder="Password"
+                placeholder="password"
+                autocomplete="current-password"
                 required
               />
             </div>
-            <button class="enter-button" type="button" onclick="signIn()">
+            <button
+              class="enter-button"
+              type="submit"
+              onsubmit="submitForm(event)"
+            >
               <span class="button-text">Go</span>
             </button>
           </form>
@@ -50,34 +56,35 @@
     </div>
 
     <script>
-      function signIn() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        // Отправка данных на сервер
-        // ...
-
-        fetch('http://localhost:3000/signIn', {
+      const submitForm = (event) => {
+        event.preventDefault();
+        var nickname = document.getElementById('nickname').value;
+        var password = document.getElementById('password').value;
+        var url = 'http://localhost:3000/signIn';
+        var options = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({email, password}),
-        })
-          .then((response) => response.text()) // измените здесь
+          body: JSON.stringify({nickname, password}),
+        };
+        fetch(url, options)
+          .then((response) => response.json())
           .then((data) => {
-            // Обработка ответа от сервера
-            console.log(data);
-
-            // Вместо console.log вы можете добавить код для обновления интерфейса или перенаправления пользователя
+            if (data.statusnum) {
+              localStorage.setItem('usernickname', data.nick);
+              window.location.href = `http://127.0.0.1:5501/client/views/CyberBlogPosts.html`;
+            } else {
+              alert(data.error);
+            }
           })
           .catch((error) => {
-            console.error('Error:', error);
-            // Обработка ошибок
+            console.error(
+              'There has been a problem with your fetch operation:',
+              error
+            );
           });
-
-        // ...
-      }
+      };
     </script>
   </body>
 </html>

@@ -9,7 +9,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
+
 .content {
   display: flex;
   align-items: center;
@@ -21,17 +23,19 @@
     margin-top: 5.4074vh;
   }
 }
+
 .header-flex {
   display: flex;
   justify-content: space-between;
-  width: 376px;
-  height: 68px;
+  width: 392px;
+  height: 61.2px;
   margin-bottom: 45px;
 
   @media (max-width: 1000px) {
     width: 296px;
   }
 }
+
 .enter-text {
   color: #cd00dd;
   font-family: Stalinist One;
@@ -40,14 +44,17 @@
   font-weight: 400;
   line-height: normal;
   align-self: flex-end;
+  margin-left: 7px;
   @media (max-width: 1000px) {
-    font-size: 38px;
+    font-size: 27px;
   }
 }
+
 .logo-ref {
   width: 120px;
-  height: 70px;
+  height: 63px;
 }
+
 .logo {
   max-width: 100%;
 }
@@ -79,21 +86,22 @@ label {
     font-size: 18px;
   }
 }
+
 input {
   border-image-source: linear-gradient(to left, #1f00df, #b100ff);
   border-image-slice: 1;
   background: rgba(255, 255, 255, 0);
-  height: 36px;
+  height: 32.4px;
   color: #e100f2;
   padding-left: 20px;
   outline: none;
   font-size: 21px;
-  min-width: 270px;
+  width: 270px;
   width: 350px;
   @media (max-width: 1000px) {
     font-size: 22px;
     width: 270px;
-    height: 44.9998px;
+    height: 35.0998px;
   }
 }
 
@@ -112,16 +120,18 @@ input::placeholder {
   font-weight: 400;
   line-height: normal;
 }
+
 @media (max-width: 1000px) {
   input::placeholder {
     font-size: 22px;
   }
 }
+
 .enter-button {
   border-radius: 10px;
   border: 5px solid #bf00fe;
   background: #e100f2;
-  height: 48px;
+  height: 43.2px;
   padding: 0;
   cursor: pointer;
   width: 130px;
@@ -130,21 +140,22 @@ input::placeholder {
   align-items: center;
   margin-top: 5px;
   @media (max-width: 1000px) {
-    height: 55px;
+    height: 49.5px;
     border-radius: 10px;
     width: 200px;
     margin-top: 10px;
   }
 }
+
 .button-text {
   color: rgba(255, 255, 255, 0.8);
-
   font-family: Stalinist One;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
+
 .lower-text-flex {
   display: flex;
   align-items: center;
@@ -173,6 +184,7 @@ input::placeholder {
     font-size: 16px;
   }
 }
+
 .right-ref {
   color: #e300f4;
   font-family: Stalinist One;

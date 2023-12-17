@@ -1,36 +1,26 @@
-// app.js
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const signRouters = require('./routes/signRouters');
-const postRouters = require('./routes/postRouters');
+const signRoutes = require('./routes/signRoutes');
+const postRoutes = require('./routes/postRoutes');
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
 
-// Встановлення шаблонізатора EJS
-app.set('view engine', 'ejs');
-
-// Використання middleware для обробки форм та JSON
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   cors({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Дозвіл передачconst cors = require('cors;)і куків та аутентифікації через кукі
+    credentials: true,
   })
 );
-// Використання статичної директорії для ресурсів
-app.use(express.static(path.join(__dirname, 'public')));
 
-// Використання роутерів для обробки шляхів
-app.use('/', signRouters);
-app.use('/', postRouters);
-
-// Підключення до бази даних MongoDB та запуск сервера
+app.use('/', signRoutes);
+app.use('/', postRoutes);
 const start = async () => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/Database');

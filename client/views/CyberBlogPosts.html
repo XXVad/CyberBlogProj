@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/CyberBlogPosts.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="hrefs">
+        <a href="./addPost.html" class="addpost">Add post</a>
+        <a href="./signIn.html" class="signIn">signIn</a>
+        <a href="./signUp.html" class="signUp">signUp</a>
+      </div>
+      <div class="cybertext">CYBERPOSTS</div>
+      <div class="contentt">
+        <div class="main-container">
+          <div id="postsContainer" class="postsContainer"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const savedNick = localStorage.getItem('usernickname');
+      document.addEventListener('DOMContentLoaded', () => {
+        const url = 'http://localhost:3000/CyberBlogPosts';
+        const options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        fetch(url, options)
+          .then((response) => response.json())
+          .then((posts) => {
+            console.log(posts);
+            const postsContainer = document.getElementById('postsContainer');
+            posts.forEach((post) => {
+              const postElement = document.createElement('div');
+              postElement.id = post._id;
+              postElement.classList.add('post');
+              postElement.innerHTML = `
+              <div class='top-post'>
+                <div class='top-top'>
+              <div class='from'>Cybername: ${savedNick}</div>
+                <div class='title'> Title: ${post.title}</div>
+              </div>
+                <div class='content'>${post.content}</div>
+                <div class='icons'>
+                <img src="../public/icons/trash.svg" alt="" class ='delete' onclick = "deletePost('${post._id}')">
+                <img src="../public/icons/edit.svg" alt="" class = 'edit' onclick = "updateLink('${post._id}')">
+              </div>
+            </div>
+              `;
+              postsContainer.appendChild(postElement);
+            });
+          })
+          .catch((error) => {
+            console.error('Помилка при виконанні запиту:', error);
+          });
+      });
+
+      const deletePost = (postId) => {
+        const url = `http://localhost:3000/deletePost/${postId}`;
+        const options = {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        fetch(url, options)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.message);
+            const postElement = document.getElementById(postId);
+            if (postElement) {
+              postElement.remove();
+            }
+          })
+          .catch((error) => {
+            console.error('Помилка при видаленні посту:', error);
+          });
+      };
+
+      const updateLink = (postId) => {
+        window.location.href = `http://127.0.0.1:5501/client/views/editPost.html?postId=${postId}`;
+      };
+    </script>
+  </body>
+</html>

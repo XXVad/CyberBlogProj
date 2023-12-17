@@ -1,49 +1,90 @@
-<!-- addPost.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Post</title>
+    <link rel="stylesheet" href="../public/addPost.css" />
+    <title>AddPost</title>
   </head>
   <body>
-    <h1>Add Post</h1>
-    <!-- Форма для ввода данных нового поста -->
-    <form id="addPostForm">
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" required />
+    <div class="wrapper">
+      <div class="hrefs">
+        <a href="./CyberBlogPosts.html" class="addpost">Home</a>
+        <a href="./signIn.html" class="signIn">SignIn</a>
+        <a href="./signUp.html" class="signUp">SignUp</a>
+      </div>
+      <div class="cybertext">CYBER ADDER</div>
+      <div class="contentt">
+        <div class="main-container">
+          <div id="postsContainer" class="postsContainer">
+            <div class="post">
+              <div class="top-post">
+                <div class="top-top">
+                  <div class="from">Cybername: nick</div>
+                </div>
+                <div class="titleinput-container">
+                  <label for="title" class="title">Title:</label>
+                  <input
+                    required
+                    type="text"
+                    class="titleinput"
+                    id="title"
+                    name="title"
+                    tabindex="1"
+                  />
+                </div>
+                <div class="contentinput-container">
+                  <label for="content" class="content">Content:</label>
+                  <input
+                    required
+                    type="text"
+                    class="contentinput"
+                    id="content"
+                    name="content"
+                    tabindex="2"
+                  />
+                </div>
+                <img
+                  src="../public/icons/send.svg"
+                  class="create"
+                  tabindex="3"
+                  onclick="addPost(event)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <label for="content">Content:</label>
-      <textarea id="content" name="content" required></textarea>
-
-      <button type="button" onclick="addPost()">Add Post</button>
-    </form>
-
-    <!-- addPost.html -->
     <script>
-      async function addPost() {
+      const addPost = (event) => {
+        event.preventDefault();
         const title = document.getElementById('title').value;
         const content = document.getElementById('content').value;
-
-        try {
-          const response = await fetch('http://localhost:3000/addPost', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({title, content}),
+        const url = 'http://localhost:3000/addPost';
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({title, content}),
+        };
+        fetch(url, options)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Response from server:', data);
+            if (data.savedPost) {
+              window.location.href =
+                'http://127.0.0.1:5501/client/views/CyberBlogPosts.html';
+            }
+          })
+          .catch((error) => {
+            console.error(
+              'There has been a problem with your fetch operation:'
+            );
           });
-
-          if (response.ok) {
-            window.location.href = 'http://localhost:3000/viewPosts';
-          } else {
-            console.error('Помилка при створенні посту:', response.statusText);
-          }
-        } catch (error) {
-          console.error('Помилка при створенні посту:', error);
-        }
-      }
+      };
     </script>
   </body>
 </html>
