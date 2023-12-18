@@ -73,7 +73,7 @@
           .then((data) => {
             if (data.statusnum) {
               localStorage.setItem('usernickname', data.nick);
-              window.location.href = `http://127.0.0.1:5501/client/views/CyberBlogPosts.html`;
+              window.location.href = `http://127.0.0.1:5501/client/views/cyberBlogPosts.html`;
             } else {
               alert(data.error);
             }

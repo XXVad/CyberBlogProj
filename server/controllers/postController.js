@@ -2,10 +2,11 @@ const postModel = require('../models/postModel');
 
 exports.addPost = async (req, res) => {
   try {
-    const {title, content} = req.body;
+    const {title, content, author} = req.body;
     const newPost = postModel({
       title: title,
       content: content,
+      author: author,
     });
     const savedPost = await newPost.save();
     res.status(201).json({message: 'Post has been added', savedPost});

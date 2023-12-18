@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../public/CyberBlogPosts.css" />
+    <link rel="stylesheet" href="../public/cyberBlogPosts.css" />
     <title>Document</title>
   </head>
 
@@ -11,8 +11,8 @@
     <div class="wrapper">
       <div class="hrefs">
         <a href="./addPost.html" class="addpost">Add post</a>
-        <a href="./signIn.html" class="signIn">signIn</a>
-        <a href="./signUp.html" class="signUp">signUp</a>
+        <a href="./signIn.html" class="signIn">Sign In</a>
+        <a href="./signUp.html" class="signUp">Sign Up</a>
       </div>
       <div class="cybertext">CYBERPOSTS</div>
       <div class="contentt">
@@ -24,7 +24,7 @@
     <script>
       const savedNick = localStorage.getItem('usernickname');
       document.addEventListener('DOMContentLoaded', () => {
-        const url = 'http://localhost:3000/CyberBlogPosts';
+        const url = 'http://localhost:3000/cyberBlogPosts';
         const options = {
           method: 'GET',
           headers: {
@@ -40,19 +40,32 @@
               const postElement = document.createElement('div');
               postElement.id = post._id;
               postElement.classList.add('post');
-              postElement.innerHTML = `
-              <div class='top-post'>
-                <div class='top-top'>
-              <div class='from'>Cybername: ${savedNick}</div>
-                <div class='title'> Title: ${post.title}</div>
-              </div>
-                <div class='content'>${post.content}</div>
-                <div class='icons'>
-                <img src="../public/icons/trash.svg" alt="" class ='delete' onclick = "deletePost('${post._id}')">
-                <img src="../public/icons/edit.svg" alt="" class = 'edit' onclick = "updateLink('${post._id}')">
-              </div>
-            </div>
+
+              const topPost = document.createElement('div');
+              topPost.classList.add('top-post');
+
+              const topTop = document.createElement('div');
+              topTop.classList.add('top-top');
+              topTop.innerHTML = `
+              <div class='from'>Ім'я: ${post.author}</div>
+              <div class='title'> Заголовок: ${post.title}</div>
+            `;
+              const content = document.createElement('div');
+              content.classList.add('content');
+              content.textContent = post.content;
+              topPost.appendChild(topTop);
+              topPost.appendChild(content);
+              if (savedNick === post.author || savedNick === 'admin') {
+                const icons = document.createElement('div');
+                icons.classList.add('icons');
+                icons.innerHTML = `
+                <img src="../public/icons/trash.svg" alt="" class ='delete' onclick="deletePost('${post._id}')">
+                <img src="../public/icons/edit.svg" alt="" class='edit' onclick="updateLink('${post._id}')">
               `;
+                topPost.appendChild(icons);
+              }
+
+              postElement.appendChild(topPost);
               postsContainer.appendChild(postElement);
             });
           })

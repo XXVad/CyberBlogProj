@@ -14,6 +14,15 @@
 
   gap: 10px;
 }
+.addpost {
+  color: #3f199a;
+}
+.signIn {
+  color: #3f199a;
+}
+.signUp {
+  color: #3f199a;
+}
 .contentt {
   display: flex;
   flex-direction: column;
@@ -74,7 +83,7 @@
   flex-direction: column;
   gap: 10px;
   border-bottom: 3px solid #c9fffb;
-  background: rgba(217, 217, 217, 0);
+  background: rgba(200, 14, 14, 0);
   padding-bottom: 5px;
 }
 .from {

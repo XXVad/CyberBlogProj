@@ -9,7 +9,7 @@
   <body>
     <div class="wrapper">
       <div class="hrefs">
-        <a href="./CyberBlogPosts.html" class="addpost">Home</a>
+        <a href="./cyberBlogPosts.html" class="addpost">Home</a>
         <a href="./signIn.html" class="signIn">SignIn</a>
         <a href="./signUp.html" class="signUp">SignUp</a>
       </div>
@@ -81,7 +81,7 @@
             console.log('Response from server:', data);
             if (data.updatedPost) {
               window.location.href =
-                'http://127.0.0.1:5501/client/views/CyberBlogPosts.html';
+                'http://127.0.0.1:5501/client/views/cyberBlogPosts.html';
             }
           })
           .catch((error) => {

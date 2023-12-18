@@ -23,7 +23,9 @@ app.use('/', signRoutes);
 app.use('/', postRoutes);
 const start = async () => {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/Database');
+    await mongoose.connect(
+      'mongodb+srv://VplusQ:Babyuk10@cluster0.prmwfao.mongodb.net/'
+    );
     app.listen(PORT, () => {
       console.log(`Сервер на порті ${PORT} запущено..`);
     });
